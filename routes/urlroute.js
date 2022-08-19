@@ -5,12 +5,13 @@ const URL = require("../models/URL");
 const route = express.Router();
 
 // routes with middlewares
+// create a new url
 route.post("/", async function (req, res) {
   console.warn(
     "New Short-Url Request Received by Ip:" + req.ip + " Path: " + req.path
   );
   let url = req.body.url_input;
-  const urlCode = shortid.generate();
+  let urlCode = shortid.generate();
 
   if(!url){
     url = req.body.url;
@@ -45,6 +46,10 @@ route.post("/", async function (req, res) {
       } else {
         // if it doesnt exist create a new url and respond
         console.warn("Url does'nt exist! creating a new short url...");
+
+        let totaldocs = await URL.find();
+        urlCode = totaldocs.length + 1;
+        console.log("Assigning Short Url : "+ urlCode);
         findOne = new URL({
           orignal_url: url,
           short_url: urlCode,
@@ -67,8 +72,9 @@ route.post("/", async function (req, res) {
       res.status(500).json("server error...");
     }
   }
-}); // create new url
+});
 
+// get a short url
 route.get("/:short_url?", async function (req, res) {
   console.warn(
     "Redirect to Short-Url Request Received by Ip:" + req.ip + " Path: " + req.path
