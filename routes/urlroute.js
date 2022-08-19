@@ -40,7 +40,7 @@ route.post("/", async function (req, res) {
             " >sending user the existing url...~Sent"
         );
         res.json({
-          original_url: findOne.orignal_url,
+          original_url: findOne.original_url,
           short_url: findOne.short_url,
         });
       } else {
@@ -63,7 +63,7 @@ route.post("/", async function (req, res) {
         );
         await findOne.save();
         res.json({
-          original_url: findOne.orignal_url,
+          original_url: findOne.original_url,
           short_url: findOne.short_url,
         });
       }
