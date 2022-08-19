@@ -9,14 +9,12 @@ route.post("/", async function (req, res) {
   console.warn(
     "New Short-Url Request Received by Ip:" + req.ip + " Path: " + req.path
   );
-  const url = req.body.url_input;
+  let url = req.body.url_input;
   const urlCode = shortid.generate();
-  console.log("req.body :");
-  console.log(req.body);
-  console.log("req.params :");
-  console.log(req.params);
-  console.log("req.query:");
-  console.log(req.query);
+
+  if(!url){
+    url = req.body.url;
+  }
   console.log("User Sent a new short Url Request for:> " + url);
   console.log("Created a Temp short URL before validation:> " + urlCode);
   console.warn("Url validation in progress...");
