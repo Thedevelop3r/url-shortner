@@ -23,7 +23,7 @@ route.post("/", async function (req, res) {
   if (!validUrl.isWebUri(url)) {
     console.error("Url validation failed: Invalid url provided!");
     res.status(400).json({
-      error: "Invalid URL",
+      error: "invalid url",
     });
   } else {
     console.log("Url validation passed!");
