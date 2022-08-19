@@ -7,6 +7,7 @@ const route = express.Router();
 // routes with middlewares
 // create a new url
 route.post("/", async function (req, res) {
+  console.log("-".repeat(40));
   console.warn(
     "New Short-Url Request Received by Ip:" + req.ip + " Path: " + req.path
   );
@@ -22,6 +23,7 @@ route.post("/", async function (req, res) {
   // check if the url is valid?
   if (!validUrl.isWebUri(url)) {
     console.error("Url validation failed: Invalid url provided!");
+    console.log("-".repeat(40));
     res.json({
       error: "invalid url",
     });
@@ -39,6 +41,7 @@ route.post("/", async function (req, res) {
             findOne.short_url +
             " >sending user the existing url...~Sent"
         );
+        console.log("-".repeat(40));
         res.json({
           original_url: findOne.original_url,
           short_url: findOne.short_url,
@@ -56,12 +59,13 @@ route.post("/", async function (req, res) {
         });
         console.log("Url created successfull!");
         console.log(
-          "Url: orignal url: " +
+          "Url: original url: " +
             findOne.original_url +
             " short url: " +
             findOne.short_url
         );
         await findOne.save();
+        console.log("-".repeat(40));
         res.json({
           original_url: findOne.original_url,
           short_url: findOne.short_url,
@@ -76,6 +80,7 @@ route.post("/", async function (req, res) {
 
 // get a short url
 route.get("/:short_url?", async function (req, res) {
+  console.log("-".repeat(40));
   console.warn(
     "Redirect to Short-Url Request Received by Ip:" + req.ip + " Path: " + req.path
   );
@@ -88,9 +93,11 @@ route.get("/:short_url?", async function (req, res) {
     // if found
     if (urlParams) {
         console.log("Url Found! Redirecting user to "+ urlParams.original_url);
+        console.log("-".repeat(40));
       return res.redirect(urlParams.original_url);
     } else {
         console.warn("Url Not Found!");
+        console.log("-".repeat(40));
       return res.status(400).json("No Url Found!");
     }
   } catch (error) {
