@@ -5,7 +5,7 @@ const URL = require("../models/URL");
 const route = express.Router();
 
 // routes with middlewares
-route.post("/new", async function (req, res) {
+route.post("/", async function (req, res) {
   console.warn(
     "New Short-Url Request Received by Ip:" + req.ip + " Path: " + req.path
   );
