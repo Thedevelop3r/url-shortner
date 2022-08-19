@@ -14,7 +14,7 @@ const MONGO_URI = process.env.MONGO_URI;
 app.use(cors()); // process headers
 app.use(express.json()); // process data | json
 app.use(bodyParser.urlencoded({extended:false}));
-app.use("/public", express.static(`${process.cwd()}/public`)); //  hosts public files for front-end "/" home route
+app.use(express.static("/public")); //  hosts public files for front-end "/" home route
 
 //--- database connect
 
