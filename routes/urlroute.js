@@ -11,9 +11,12 @@ route.post("/", async function (req, res) {
   );
   const url = req.body.url_input;
   const urlCode = shortid.generate();
-  console.log("req.body :" + req.body);
-  console.log("req.body :" + req.params);
-  console.log("req.body :" + req.query);
+  console.log("req.body :");
+  console.log(req.body);
+  console.log("req.params :");
+  console.log(req.params);
+  console.log("req.query:");
+  console.log(req.query);
   console.log("User Sent a new short Url Request for:> " + url);
   console.log("Created a Temp short URL before validation:> " + urlCode);
   console.warn("Url validation in progress...");
