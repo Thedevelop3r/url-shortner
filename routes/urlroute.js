@@ -31,7 +31,7 @@ route.post("/", async function (req, res) {
     try {
       // check if its already in the database
       let findOne = await URL.findOne({
-        orignal_url: url,
+        original_url: url,
       });
       if (findOne) {
         console.log(
@@ -40,7 +40,7 @@ route.post("/", async function (req, res) {
             " >sending user the existing url...~Sent"
         );
         res.json({
-          orignal_url: findOne.orignal_url,
+          original_url: findOne.orignal_url,
           short_url: findOne.short_url,
         });
       } else {
@@ -51,19 +51,19 @@ route.post("/", async function (req, res) {
         urlCode = totaldocs.length + 1;
         console.log("Assigning Short Url : "+ urlCode);
         findOne = new URL({
-          orignal_url: url,
+          original_url: url,
           short_url: urlCode,
         });
         console.log("Url created successfull!");
         console.log(
           "Url: orignal url: " +
-            findOne.orignal_url +
+            findOne.original_url +
             " short url: " +
             findOne.short_url
         );
         await findOne.save();
         res.json({
-          orignal_url: findOne.orignal_url,
+          original_url: findOne.orignal_url,
           short_url: findOne.short_url,
         });
       }
@@ -87,8 +87,8 @@ route.get("/:short_url?", async function (req, res) {
     });
     // if found
     if (urlParams) {
-        console.log("Url Found! Redirecting user to "+ urlParams.orignal_url);
-      return res.redirect(urlParams.orignal_url);
+        console.log("Url Found! Redirecting user to "+ urlParams.original_url);
+      return res.redirect(urlParams.original_url);
     } else {
         console.warn("Url Not Found!");
       return res.status(400).json("No Url Found!");
