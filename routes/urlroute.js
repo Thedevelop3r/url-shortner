@@ -11,13 +11,16 @@ route.post("/", async function (req, res) {
   );
   const url = req.body.url_input;
   const urlCode = shortid.generate();
+  console.log("req.body :" + req.body);
+  console.log("req.body :" + req.params);
+  console.log("req.body :" + req.query);
   console.log("User Sent a new short Url Request for:> " + url);
   console.log("Created a Temp short URL before validation:> " + urlCode);
   console.warn("Url validation in progress...");
   // check if the url is valid?
   if (!validUrl.isWebUri(url)) {
     console.error("Url validation failed: Invalid url provided!");
-    res.status(401).json({
+    res.status(400).json({
       error: "Invalid URL",
     });
   } else {
