@@ -15,7 +15,7 @@ app.use(cors()); // process headers
 app.use(express.json()); // process data | json
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static("/public"));
-app.use(express.static("/views")); //  hosts public files for front-end "/" home route
+app.use("/public", express.static(`${process.cwd()}/public`)); //  hosts public files for front-end "/" home route
 
 //--- database connect
 
@@ -35,10 +35,8 @@ app.use("/api/shorturl", route);
 app.post("/", route);
 // hosting homepage
 app.get("/", function (req, res) {
-  res.sendFile("/views/index.html");
+  res.sendFile(process.cwd() + "/views/index.html");
 });
-
-
 // Your first API endpoint
 app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
